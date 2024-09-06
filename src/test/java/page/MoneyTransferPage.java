@@ -23,15 +23,15 @@ public class MoneyTransferPage {
         transferHead.shouldBe(visible);
     }
 
+    public DashboardPage makeValidTransfer(String amountToTransfer, DataHelper.Card card) {
+        makeTransfer(amountToTransfer, card);
+        return new DashboardPage();
+    }
+
     public void makeTransfer(String amountToTransfer, DataHelper.Card card) {
         amount.setValue(amountToTransfer);
         from.setValue(card.getNumber());
         transferButton.click();
-    }
-
-    public DashboardPage makeValidTransfer(String amountToTransfer, DataHelper.Card card) {
-        makeTransfer(amountToTransfer, card);
-        return new DashboardPage();
     }
 
     public void findErrorMessage(String expectedText) {

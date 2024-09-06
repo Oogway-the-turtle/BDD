@@ -60,4 +60,15 @@ public class CashTransfersTest {
         assertEquals(expectedBalanceSecondCard, actualBalanceSecondCard);
     }
 
+    @Test
+    void shouldErrorMessage() {
+        var amount = generateInvalidAmount(firstCardBalance);
+        var transferPage = dashboardPage.cardToTransfer(secondCard);
+        transferPage.makeTransfer(String.valueOf(amount), firstCard);
+        transferPage.findErrorMessage("Операция не может быть выполнена. Сумма превышает остаток на балансе");
+        var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCard);
+        var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCard);
+        assertEquals(firstCardBalance, actualBalanceFirstCard);
+        assertEquals(secondCardBalance, actualBalanceSecondCard);
+    }
 }
